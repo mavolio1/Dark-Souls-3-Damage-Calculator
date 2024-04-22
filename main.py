@@ -77,12 +77,12 @@ def json_to_persistent(weapons_list):
     for wep in weapons_list:
         json_list.append(json.dumps(wep.__dict__))
     
-    with open('persistent_files/weapons.json', 'w') as f:
+    with open(cfg.persistent_folder + 'weapons.json', 'w') as f:
         json.dump(json_list, f)
 
 def load_from_json():
     weapons_list = []
-    with open('persistent_files/weapons.json', 'r') as f:
+    with open(cfg.persistent_folder + 'weapons.json', 'r') as f:
         weapons_list = json.load(f)
     
     return weapons_list
