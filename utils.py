@@ -16,11 +16,16 @@ class Weapon:
         self.faith_scale = faith_scale
 
     def __repr__(self):
-        print(f'+-------' + f'{self.name:40}'.replace(' ', '-') + '-------+')
-        print(f'|PHYSICAL ATK                   :       ' + f'{str(self.phys_atk):3}'      + '            |')
-        print(f'|MAGICAL ATK                    :       ' + f'{str(self.magic_atk):3}'     + '            |')
-        print(f'|FIRE ATK                       :       ' + f'{str(self.fire_atk):3}'      + '            |')
-        print(f'|LIGHTNING ATK                  :       ' + f'{str(self.lightning_atk):3}' + '            |')
-        print(f'|DARK ATK                       :       ' + f'{str(self.dark_atk):3}'      + '            |')
-        print(f'+------------------------------------------------------+')
-        return ''
+        pprint = ''
+        pprint += f'+-------' + f'{self.name:40}'.replace(' ', '-') + '--------+\n'
+        pprint += f'|WEAPON TYPE                    :       ' + f'{self.weapon_type:10}'       + '     |\n'
+        pprint += f'|ATTACK TYPE                    :       ' + f'{self.attack_type:10}'       + '     |\n'
+        pprint += f'+------------------------------------------------------+\n'
+        pprint += f'|PHYSICAL ATK                   :       ' + f'{str(self.phys_atk):3}'      + '            |\n'
+        pprint += f'|MAGICAL ATK                    :       ' + f'{str(self.magic_atk):3}'     + '            |\n'
+        pprint += f'|FIRE ATK                       :       ' + f'{str(self.fire_atk):3}'      + '            |\n'
+        pprint += f'|LIGHTNING ATK                  :       ' + f'{str(self.lightning_atk):3}' + '            |\n'
+        pprint += f'|DARK ATK                       :       ' + f'{str(self.dark_atk):3}'      + '            |\n'
+        pprint += f'+------------------------------------------------------+'
+        
+        return pprint

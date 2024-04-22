@@ -40,9 +40,8 @@ def load_weapon_data():
         html = request.content
         soup = BeautifulSoup(html, 'html.parser')
         infobox = soup.find('div', class_='infobox')
-        
-        name = url.replace(cfg.root_url, '').replace('/', '').replace('+', ' ')
-        phys_atk, magic_atk, fire_atk, light_atk, dark_atk = 0, 0, 0, 0, 0
+        wep = Weapon(url.replace(cfg.root_url, '').replace('/', '').replace('+', ' '),
+                      'tmp', 'tmp', 0, 0, 0, 0, 0, '-', '-', '-', '-')
         
         trs = infobox.find_all('tr')
         for tr in trs:
@@ -52,21 +51,22 @@ def load_weapon_data():
                     title = img.get('title')
                     if title == 'Physical Attack':
                         if img.find_next().text != '-':
-                            phys_atk = int(img.find_next().text)
+                            wep.phys_atk = int(img.find_next().text)
                     elif title == 'Magical Attack':
                         if img.find_next().text != '-':
-                            magic_atk = int(img.find_next().text)
+                            wep.magic_atk = int(img.find_next().text)
                     elif title == 'Fire Attack':
                         if img.find_next().text != '-':
-                            fire_atk = int(img.find_next().text)
+                            wep.fire_atk = int(img.find_next().text)
                     elif title == 'Lightning Attack':
                         if img.find_next().text != '-':
-                            light_atk = int(img.find_next().text)
+                            wep.lightning_atk = int(img.find_next().text)
                     elif title == 'Dark Attack':
                         if img.find_next().text != '-':
-                            dark_atk = int(img.find_next().text)
+                            wep.dark_atk = int(img.find_next().text)
+                    elif title == 'Weapon Type':
+                        wep.weapon_type = img.find_next().text
 
-        wep = Weapon(name, 0, 0, phys_atk, magic_atk, fire_atk, light_atk, dark_atk, 0, 0, 0, 0)
         weapons_list.append(wep)
 
     return weapons_list
