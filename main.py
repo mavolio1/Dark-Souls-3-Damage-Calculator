@@ -46,26 +46,38 @@ def load_weapon_data():
         trs = infobox.find_all('tr')
         for tr in trs:
             if tr.find('img'):
-                img = tr.find('img')
-                if img.get('title'):
-                    title = img.get('title')
-                    if title == 'Physical Attack':
-                        if img.find_next().text != '-':
-                            wep.phys_atk = int(img.find_next().text)
-                    elif title == 'Magical Attack':
-                        if img.find_next().text != '-':
-                            wep.magic_atk = int(img.find_next().text)
-                    elif title == 'Fire Attack':
-                        if img.find_next().text != '-':
-                            wep.fire_atk = int(img.find_next().text)
-                    elif title == 'Lightning Attack':
-                        if img.find_next().text != '-':
-                            wep.lightning_atk = int(img.find_next().text)
-                    elif title == 'Dark Attack':
-                        if img.find_next().text != '-':
-                            wep.dark_atk = int(img.find_next().text)
-                    elif title == 'Weapon Type':
-                        wep.weapon_type = img.find_next().text
+                imgs = tr.find_all('img')
+                for img in imgs:
+                    if img.get('title'):
+                        # parse damage stats and weapon type
+                        title = img.get('title')
+                        if title == 'Physical Attack':
+                            if img.find_next().text != '-':
+                                wep.phys_atk = int(img.find_next().text)
+                        elif title == 'Magical Attack':
+                            if img.find_next().text != '-':
+                                wep.magic_atk = int(img.find_next().text)
+                        elif title == 'Fire Attack':
+                            if img.find_next().text != '-':
+                                wep.fire_atk = int(img.find_next().text)
+                        elif title == 'Lightning Attack':
+                            if img.find_next().text != '-':
+                                wep.lightning_atk = int(img.find_next().text)
+                        elif title == 'Dark Attack':
+                            if img.find_next().text != '-':
+                                wep.dark_atk = int(img.find_next().text)
+                        elif title == 'Weapon Type':
+                            wep.weapon_type = img.find_next().text
+                        elif title == 'Attack Type':
+                            wep.attack_type = img.find_next().text.replace(' ', '')
+
+            if tr.find('td') and tr.find('td').text in cfg.scalings:
+                # parse scalings
+                tds = tr.find_all('td')
+                wep.str_scale = tds[0].text
+                wep.dex_scale = tds[1].text
+                wep.int_scale = tds[2].text
+                wep.faith_scale = tds[3].text
 
         weapons_list.append(wep)
 
