@@ -1,19 +1,7 @@
 class Weapon:
-    def __init__(self, name, weapon_type, attack_type, phys_atk,
-                  magic_atk, fire_atk, ligthning_atk, dark_atk,
-                  str_scale, dex_scale, int_scale, faith_scale):
-        self.name = name
-        self.weapon_type = weapon_type
-        self.attack_type = attack_type
-        self.phys_atk = phys_atk
-        self.magic_atk = magic_atk
-        self.fire_atk = fire_atk
-        self.lightning_atk = ligthning_atk
-        self.dark_atk = dark_atk
-        self.str_scale = str_scale
-        self.dex_scale = dex_scale
-        self.int_scale = int_scale
-        self.faith_scale = faith_scale
+    def __init__(self, d):
+        for k, v in d.items():
+            setattr(self, k, v)
 
     def __repr__(self):
         pprint = ''
